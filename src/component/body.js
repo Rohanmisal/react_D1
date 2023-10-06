@@ -1,6 +1,6 @@
- import { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { restrauntList } from "./constant";
- import RestrauntCard from "./restrauntCard";
+import RestrauntCard from "./restrauntCard";
 
  function filterData(searchText, restaurants){
     return restaurants.filter((restaurant)=>
@@ -11,7 +11,9 @@ import { restrauntList } from "./constant";
  };
  
 const Body = () =>{ 
-    const [restaurants, setRestaurants] = useState(restrauntList);
+    //const [filterRestaurants, setfilterRestaurants] = useState();
+    //const[allRestaurants, setallRestaurants] = useState();
+    const [restaurants, setRestaurants] = useState();
     const [searchText, setSearchText] = useState("");
 
     useEffect(()=>{
@@ -28,6 +30,13 @@ const Body = () =>{
     console.log(setRestaurants)
     console.log(json)
    }
+   //conditional Redering
+   //if restraunt is empty => shimmer ui
+   //if restraunt has data => actual data ui
+
+   //not render component (Early Return)
+   //if (!allRestaurants) return null;
+   // filterRestaurants (restaurants.length == 0) ? <Shimmer/> :
 return(
     <>
         <div className="search-container">
@@ -47,7 +56,7 @@ return(
                 //filter data
                 
                 //const data= filterData(searchText, restaurants);
-                //update data
+                //update data setfilterRestaurants -> allRestaurants
                 setRestaurants(filterData(searchText, restaurants));
             }}>Search</button>
         </div>
@@ -57,6 +66,7 @@ return(
                 return <RestrauntCard {...restaurant.card.card.info} key={restaurant.card.card.info.id} />
                 
             })}
+            //filterRestaurants
         </div>
     </>    
     );
