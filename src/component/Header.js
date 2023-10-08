@@ -1,7 +1,7 @@
-import { Link } from "react-router-dom";
-const loggedInUser =() =>{
-    return false;
-};
+//import { Link } from "react-router-dom";
+// const isLoggedIn =() =>{
+//     return false;
+// };
 
 // SPA - Single Page Application ???
 //Client Side Routing
@@ -19,7 +19,7 @@ export const Title = () => {
 };
     
 const Header = () => {
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    // const [isLoggedIn, setIsLoggedIn] = useState(false);
 return (
     <div className="header">
     <Title/>
@@ -43,11 +43,11 @@ return (
             setIsLoggedIn(loggedInUser)
         }}>{isLoggedIn}</button>
     </div> */}
-    {isLoggedIn ?(
+    {/* {isLoggedIn ?(
         <button onClick={() => setIsLoggedIn(false)}>Logout</button>
     ): (
         <button onClick={()=> setIsLoggedIn(true)}>Login</button>
-    )}
+    )} */}
     </div>
 );
 };
