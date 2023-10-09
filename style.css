@@ -38,3 +38,7 @@
     background: aqua;
     margin: 20px;
 }
+
+.menu{
+    display: flex;
+}
