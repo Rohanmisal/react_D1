@@ -1,8 +1,8 @@
-//import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useState } from "react";
-const isLoggedIn =() =>{
-    return false;
-};
+// const isLoggedIn =() =>{
+//     return false;
+// };
 
 // SPA - Single Page Application ???
 //Client Side Routing
@@ -26,15 +26,17 @@ return (
     <Title/>
     <div className="nav-items">
     <ul>
-        {/* <Link to="/">
-
-        </Link> */}
+        <Link to="/">
         <li>Home</li>
-        {/* <Link to="/about">
-
-        </Link> */}
+        </Link>
+        
+        <Link to="/about">
         <li>About</li>
+        </Link>
+
+        <Link to="/Contact">
         <li>Contact</li>
+        </Link>
         <li>Cart</li>
     </ul>
     </div>

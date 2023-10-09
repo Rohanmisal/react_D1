@@ -3,16 +3,16 @@ import ReactDOM from "react-dom/client";
 import Header from "./component/Header";
 import Body from "./component/body";
 import Footer from "./component/Footer";
-import About from "./component/About";
+import About from "./component/About.js";
 import Error from "./component/Error.js"
+import Contact from "./component/Contact";
 import {createBrowserRouter, RouterProvider, Outlet} from "react-router-dom";
 //<outlet/>
 const AppLayout = () => {
   return (
     <>
     <Header/>
-    
-    <Body/>
+    <Outlet/>
     <Footer/>
     </>
     
@@ -26,8 +26,16 @@ const appRouter = createBrowserRouter([
     errorElement:<Error/>,
     children:[
       {
+        path:"/",
+        element:<Body/>,
+      },
+      {
         path:"/about",
         element:<About/>,
+      },
+      {
+        path:"/Contact",
+        element:<Contact/>,
       },
     ]
   },
