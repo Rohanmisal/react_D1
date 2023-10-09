@@ -1,5 +1,9 @@
 const Shimmer= () =>{
-    return <h1>Shimmer Ui is Loading....</h1>;
+    return (
+        <div className="restraunt-list">
+            {Array(10).fill("").map((e,index)=>(<div  key={index} className="shimmer"></div>))}
+        </div>
+    );
     
 };
 

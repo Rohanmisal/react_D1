@@ -32,3 +32,9 @@
     display: flex;
     flex-wrap: wrap;
 }
+.shimmer{
+    width: 200px;
+    height: 200px;
+    background: aqua;
+    margin: 20px;
+}

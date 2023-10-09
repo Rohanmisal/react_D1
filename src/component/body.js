@@ -1,19 +1,20 @@
 import { useEffect, useState } from "react";
-import { restrauntList } from "./constant";
+//import { restrauntList } from "./constant";
 import RestrauntCard from "./restrauntCard";
+import Shimmer from "./Shimmer";
 
- function filterData(searchText, restaurants){
-    return restaurants.filter((restaurant)=>
-    restaurant.card.card.info.name.includes(searchText)
+ function filterData(searchText, allRestaurants){
+    const filterData= allRestaurants.filter((restaurant)=>
+    restaurant?.info?.name?.toLowerCase().includes(searchText.toLowerCase())
    
     );
-    //return filterData; 
+   return filterData; 
  };
  
 const Body = () =>{ 
-    //const [filterRestaurants, setfilterRestaurants] = useState();
-    //const[allRestaurants, setallRestaurants] = useState();
-    const [restaurants, setRestaurants] = useState(restrauntList);
+    const [filterRestaurants, setfilterRestaurants] = useState([]);
+    const[allRestaurants, setallRestaurants] = useState([]);
+    //const [restaurants, setRestaurants] = useState([]);
     const [searchText, setSearchText] = useState("");
 
     useEffect(()=>{
@@ -22,25 +23,28 @@ const Body = () =>{
 
    async function getRestaurant(){
     const data = await fetch(
-        "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9351929&lng=77.62448069999999&page_type=DESKTOP_WEB_LISTING"
+        "https://www.swiggy.com/dapi/restaurants/list/v5?lat=18.5204303&lng=73.8567437&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
         );
     const json = await data.json();
     
-    setRestaurants(json?.data?.cards[4]?.card?.card?.info);
+    setfilterRestaurants(json?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle.restaurants );
+    setallRestaurants(json?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle.restaurants );
     //console.log(setRestaurants)
-    console.log(json?.data?.cards[4]?.card?.card?.info)
-    console.log(json)
+    
+    
    }
    //"https://www.swiggy.com/dapi/restaurants/list/v5?lat=18.4626559&lng=73.8361927&collection=83644&tags=layout_CCS_Pizza&sortBy=&filters=&type=rcv2&offset=0&page_type=null"
-   
+   //
    //conditional Redering
    //if restraunt is empty => shimmer ui
    //if restraunt has data => actual data ui
 
    //not render component (Early Return)
-   //if (!allRestaurants) return null;
-   // filterRestaurants (restaurants.length == 0) ? <Shimmer/> :
-return(
+   if (!allRestaurants) return null;
+   if(filterRestaurants.length == 0 )
+   return <h1>No restraunt match your Filter</h1>
+
+    return filterRestaurants.length == 0 ? <Shimmer/> :(
     <>
         <div className="search-container">
             <input
@@ -57,16 +61,17 @@ return(
             className="search-btn"
             onClick={()=>{
                 //filter data
-                
+                data = filterData(searchText, allRestaurants)
                 //const data= filterData(searchText, restaurants);
                 //update data setfilterRestaurants -> allRestaurants
-                setRestaurants(filterData(searchText, restaurants));
+                setfilterRestaurants(data);
             }}>Search</button>
+            
         </div>
 
         <div className="restraunt-list">
-            {restaurants.map((restaurant) =>{
-                return <RestrauntCard {...restaurant.card.card.info} key={restaurant.card.card.info.id} />
+            {filterRestaurants.map((restaurant) =>{
+                return <RestrauntCard {...restaurant.info} key={restaurant.info.id} />
                 
             })}
             {/* filterRestaurants */}
@@ -76,5 +81,3 @@ return(
 };
 
 export default Body;
-  
-

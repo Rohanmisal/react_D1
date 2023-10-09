@@ -1,6 +1,7 @@
 export const CDN_img = 
-"https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/";
+"https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,w_588,h_320,c_fill/";
 
+// "https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,w_588,h_320,c_fill/"
 export const restrauntList = [
     {
         "card": {
