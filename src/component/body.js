@@ -3,15 +3,10 @@ import { useEffect, useState } from "react";
 import RestrauntCard from "./restrauntCard";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
+import { filterData } from "../utils/helper";
+import useOnline from "../utils/useOnline";
 
- function filterData(searchText, allRestaurants){
-    const filterData= allRestaurants.filter((restaurant)=>
-    restaurant?.info?.name?.toLowerCase().includes(searchText.toLowerCase())
-   
-    );
-   return filterData; 
- };
- 
+ // readable, maintanble, reusable, testable (optimize app)
 const Body = () =>{ 
     const [filterRestaurants, setfilterRestaurants] = useState([]);
     const[allRestaurants, setallRestaurants] = useState([]);
@@ -24,15 +19,23 @@ const Body = () =>{
 
    async function getRestaurant(){
     const data = await fetch(
-        "https://www.swiggy.com/dapi/restaurants/list/v5?lat=18.5204303&lng=73.8567437&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
+        "https://www.eatsure.com/v1/api/get_restaurants?store_id=10228&city_id=9017&"
         );
     const json = await data.json();
     
-    setfilterRestaurants(json?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle.restaurants );
-    setallRestaurants(json?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle.restaurants );
-    //console.log(setRestaurants)
+    // setfilterRestaurants(json?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle.restaurants );
+    // setallRestaurants(json?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle.restaurants );
+    setfilterRestaurants(json?.data?.data );
+    setallRestaurants(json?.data?.data );
+    //console.log(setRestaurants) 
+    //"https://www.swiggy.com/dapi/restaurants/list/v5?lat=18.5204303&lng=73.8567437&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
     
     
+   }
+
+   const isOnline = useOnline();
+   if(!isOnline){
+    return <h1> Offline, please check your internet connetion</h1>
    }
    //"https://www.swiggy.com/dapi/restaurants/list/v5?lat=18.4626559&lng=73.8361927&collection=83644&tags=layout_CCS_Pizza&sortBy=&filters=&type=rcv2&offset=0&page_type=null"
    //
@@ -73,13 +76,15 @@ const Body = () =>{
         <div className="restraunt-list">
             {filterRestaurants.map((restaurant) =>{
                 return (
-                    <Link to={"/restaurant/" + restaurant.data.id}>
-                    <RestrauntCard {...restaurant.info} key={restaurant.info.id} />
+                    <Link to={"/restaurant/" + restaurant.collection_id}>
+                    <RestrauntCard {...restaurant} key={restaurant.brand_id} />
                     </Link>
                 );
                 
             })}
             {/* filterRestaurants */}
+            
+                    
         </div>
     </>    
     );

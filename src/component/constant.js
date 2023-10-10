@@ -1,7 +1,8 @@
 export const CDN_img = 
 "https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,w_588,h_320,c_fill/";
 
-// "https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,w_588,h_320,c_fill/"
+export const FETCH_MENU_URL =
+  "https://www.eatsure.com/v1/api/get_all_products/brand_id/20/store_id/10228/source_id/"
 export const restrauntList = [
     {
         "card": {

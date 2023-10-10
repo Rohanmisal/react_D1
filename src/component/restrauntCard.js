@@ -1,16 +1,16 @@
 import { CDN_img } from "./constant";
 
-const RestrauntCard = ({name, cuisines, cloudinaryImageId, costForTwo }) =>{
+const RestrauntCard = ({banner_image_es, brand_name }) =>{
     return (
       <div className="card">
-      {/* <img src={banner_image_es} alt="rsetro"/>
-      <h2>{brand_name}</h2> */}
-        <img 
+      <img src={banner_image_es} alt="rsetro"/>
+      <h2>{brand_name}</h2>
+        {/* <img 
         src=
         { CDN_img + cloudinaryImageId } alt="restroImg"/>
         <h2>{name}</h2>
         <h3>{cuisines.join(", ")}</h3>
-        <h4>{costForTwo} </h4>
+        <h4>{costForTwo} </h4> */}
       </div>
     )
 };
